@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<!--Tags básicas do head-->
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Mangás</title>
+		<!--Link dos nossos arquivos CSS e JS padrão-->
+		<link rel="stylesheet" type="text/css" href="css/estilos.css">
+		<script src="js/scripts.js"></script>
+		<!--Link dos arquivos CSS e JS do Bootstrap-->
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<script src="js/bootstrap.min.js"></script>
+		<!--Link do JQuery-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<link rel="shortcut icon" type="imagex/png" href="./img/iconenaruto.ico">
+	</head>
+	
+	<body class=ajustavel>
+		
+		<div class="container">
+			
+			<div class="row">
+			<div class="col-md-12">
+			<img src="img/opfundo.png" id="tela1">
+			</div>
+			</div>
+			
+			
+			<!-- CABEÇALHO COM O TÍTULO E BOTÃO DE ADICIONAL NOVO -->
+			<div class="row">
+				<div class="col-md-4" id="title">
+					<h1>LISTA DE MANGÁS</h1>
+				</div>
+				<div class="col-md-1">
+					<a href="/novo">
+					<img src="img/add.png" style="height: 40px; padding-top:10px;">
+					</a>
+				</div>
+			</div>
+			
+			<div class="row">
+			<div class="col-md-12">
+			
+			</div>
+			</div>
+			
+			<!-- CABEÇALHO COM OS NOMES DOS ATRIBUTOS/CAMPOS DOS OBJETOS -->
+			<!-- Deixe uma coluna por atributo e alterar os seus títulos como desejado -->
+			<div class="row" style="font-weight: bold" id="text">
+				<div class="col-md-1">Código</div> 
+				<div class="col-md-2">Título</div>
+				<div class="col-md-2">Autor</div>
+				<div class="col-md-1">Editora</div>
+				<div class="col-md-1">Volume</div>
+				<div class="col-md-1">Páginas</div>
+				<div class="col-md-2">ISBN</div>
+			</div>
+			
+			
+			<!-- LINHAS PARA CADA UM DOS OBJETOS CADASTRADOS NO BANCO -->
+			<!-- Altere o nome da lista para o mesmo passado no método chamarListar da Controller-->
+			<!-- Deixe uma coluna por atributo e altere seus tamanhos como desejado -->
+			<div th:each="objeto : ${listaMangas}">
+				<div class="row">
+					<div class="col-md-1" th:text="${objeto.isbn}"></div>
+					<div class="col-md-2" th:text="${objeto.nome}"></div>
+					<div class="col-md-2" th:text="${objeto.autor}"></div>
+					<div class="col-md-1" th:text="${objeto.editora}"></div>
+					<div class="col-md-1" th:text="${objeto.volume}"></div>
+					<div class="col-md-1" th:text="${objeto.paginas}"></div>
+					<div class="col-md-2" th:text="${objeto.isb}"></div>
+					
+					
+					<!-- OPÇÃO ALTERAR E EXCLUIR DE CADA UM DOS OBJETOS CADASTRADOS NO BANCO -->
+					<!-- Altere o nome do atributo que é o identificador do seu objeto -->
+					
+					<div class="col-md-1">
+						<a th:href="@{'/editar/' + ${objeto.isbn}}">editar</a>
+					</div>
+					<div class="col-md-1">
+						<a th:href="@{'/excluir/' + ${objeto.isbn}}">excluir</a>
+					</div>
+				
+				</div>
+			</div>
+			
+		</div>
+		
+	</body>
+
+</html>
